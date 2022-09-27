@@ -1,3 +1,6 @@
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+
 public class Transaction {
 
     /**  unique sequential number (integer) from 1 to 5,000,000 (the file has 5M transactions) */
@@ -22,5 +25,16 @@ public class Transaction {
         this.transTotal = transTotal;
         this.transNumItems = transNumItems;
         this.transDesc = transDesc;
+    }
+
+    public static void generateTransactionFile() throws FileNotFoundException {
+        // Open/Create the file.
+        PrintWriter out = new PrintWriter("transactions.txt");
+
+        // generate data and write to file
+        out.println("...");
+
+        // Close the file.
+        out.close();
     }
 }

@@ -1,3 +1,6 @@
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+
 public class Customer {
 
     /** unique sequential number (integer) from 1 to 50,000 (that is the file will have 50,000 line)*/
@@ -26,5 +29,16 @@ public class Customer {
         this.gender = gender;
         this.countryCode = countryCode;
         this.salary = salary;
+    }
+
+    public static void generateCustomerFile() throws FileNotFoundException {
+        // Open/Create the file.
+        PrintWriter out = new PrintWriter("customers.txt");
+
+        // generate data and write to file
+        out.println("...");
+
+        // Close the file.
+        out.close();
     }
 }
