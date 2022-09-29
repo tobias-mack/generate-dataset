@@ -1,5 +1,8 @@
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
+import java.util.stream.Collectors;
 
 public class Customer {
 
@@ -31,14 +34,75 @@ public class Customer {
         this.salary = salary;
     }
 
-    public static void generateCustomerFile() throws FileNotFoundException {
+    public static void generateCustomerFile() throws IOException {
+
+        //IDs
+        ArrayList<Integer> ids = new ArrayList<Integer>();
+        for (int i=1; i<=50000; i++) {
+            ids.add(new Integer(i));
+        }
+        Collections.shuffle(ids);
+
+        //Names
+        String string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "0123456789" + "abcdefghijklmnopqrstuvxyz";
+        ArrayList<String> names = new ArrayList<String>();
+
+        for(int i = 0; i < 50000; i++){
+            int n = generateRandomNumber(10, 20);
+            StringBuilder sb = new StringBuilder(n);
+
+            for(int j = 0; j < n; j++){
+                int index= (int)(string.length() * Math.random());
+                sb.append(string.charAt(index));
+            }
+            names.add(sb.toString());
+        }
+
+        //Ages
+        ArrayList<Integer> ages = new ArrayList<Integer>();
+        for(int i = 0; i < 50000; i++){
+            ages.add(generateRandomNumber(10, 70));
+        }
+
+        //Genders
+        ArrayList<String> list = new ArrayList<String>();
+        list.add("Male");
+        list.add("Female");
+
+        ArrayList<String> genders = new ArrayList<String>();
+        for(int i = 0; i < 50000; i++){
+            genders.add(list.get(new Random().nextInt(list.size())));
+        }
+
+        //CountryCodes
+        ArrayList<Integer> countryCodes = new ArrayList<Integer>();
+        for(int i = 0; i < 50000; i++){
+            countryCodes.add(generateRandomNumber(1, 10));
+        }
+
+        //Salaries
+        ArrayList<Integer> salaries = new ArrayList<Integer>();
+        for(int i = 0; i < 50000; i++){
+            salaries.add(generateRandomNumber(100, 10000));
+        }
+
+
         // Open/Create the file.
-        PrintWriter out = new PrintWriter("customers.txt");
+        File file = new File("customers.csv");
+        FileWriter fw = new FileWriter(file);
+        BufferedWriter bw = new BufferedWriter(fw);
 
-        // generate data and write to file
-        out.println("...");
+        for(int i = 0; i < 50000; i++){
+            bw.write((ids.get(i))+","+(names.get(i))+","+(ages.get(i))+","+(genders.get(i))+","+countryCodes.get(i)+","+(salaries.get(i)));
+            bw.newLine();
+        }
 
-        // Close the file.
-        out.close();
+        bw.close();
+        fw.close();
+
+    }
+
+    private static int generateRandomNumber(int minValue, int maxValue){
+        return (int)(Math.random() * (maxValue - minValue) + minValue);
     }
 }
