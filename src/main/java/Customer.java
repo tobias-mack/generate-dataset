@@ -1,27 +1,41 @@
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 public class Customer {
 
-    /** unique sequential number (integer) from 1 to 50,000 (that is the file will have 50,000 line)*/
+    /**
+     * unique sequential number (integer) from 1 to 50,000 (that is the file will have 50,000 line)
+     */
     int id;
 
-    /** random sequence of characters of length between 10 and 20 (do not include commas)*/
+    /**
+     * random sequence of characters of length between 10 and 20 (do not include commas)
+     */
     String name;
 
-    /** random number (integer) between 10 to 70 */
+    /**
+     * random number (integer) between 10 to 70
+     */
     int age;
 
-    /** string that is either “male” or “female” */
+    /**
+     * string that is either “male” or “female”
+     */
     String gender;
 
-    /** random number (integer) between 1 and 10 */
+    /**
+     * random number (integer) between 1 and 10
+     */
     int countryCode;
 
-    /** random number (float) between 100 and 10000 */
+    /**
+     * random number (float) between 100 and 10000
+     */
     float salary;
 
 
@@ -38,7 +52,7 @@ public class Customer {
 
         //IDs
         ArrayList<Integer> ids = new ArrayList<Integer>();
-        for (int i=1; i<=50000; i++) {
+        for (int i = 1; i <= 50000; i++) {
             ids.add(new Integer(i));
         }
         Collections.shuffle(ids);
@@ -47,12 +61,12 @@ public class Customer {
         String string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "0123456789" + "abcdefghijklmnopqrstuvxyz";
         ArrayList<String> names = new ArrayList<String>();
 
-        for(int i = 0; i < 50000; i++){
-            int n = generateRandomNumber(10, 20);
+        for (int i = 0; i < 50000; i++) {
+            int n = Util.generateRandomNumber(10, 20);
             StringBuilder sb = new StringBuilder(n);
 
-            for(int j = 0; j < n; j++){
-                int index= (int)(string.length() * Math.random());
+            for (int j = 0; j < n; j++) {
+                int index = (int) (string.length() * Math.random());
                 sb.append(string.charAt(index));
             }
             names.add(sb.toString());
@@ -60,8 +74,8 @@ public class Customer {
 
         //Ages
         ArrayList<Integer> ages = new ArrayList<Integer>();
-        for(int i = 0; i < 50000; i++){
-            ages.add(generateRandomNumber(10, 70));
+        for (int i = 0; i < 50000; i++) {
+            ages.add(Util.generateRandomNumber(10, 70));
         }
 
         //Genders
@@ -70,20 +84,20 @@ public class Customer {
         list.add("Female");
 
         ArrayList<String> genders = new ArrayList<String>();
-        for(int i = 0; i < 50000; i++){
+        for (int i = 0; i < 50000; i++) {
             genders.add(list.get(new Random().nextInt(list.size())));
         }
 
         //CountryCodes
         ArrayList<Integer> countryCodes = new ArrayList<Integer>();
-        for(int i = 0; i < 50000; i++){
-            countryCodes.add(generateRandomNumber(1, 10));
+        for (int i = 0; i < 50000; i++) {
+            countryCodes.add(Util.generateRandomNumber(1, 10));
         }
 
         //Salaries
         ArrayList<Integer> salaries = new ArrayList<Integer>();
-        for(int i = 0; i < 50000; i++){
-            salaries.add(generateRandomNumber(100, 10000));
+        for (int i = 0; i < 50000; i++) {
+            salaries.add(Util.generateRandomNumber(100, 10000));
         }
 
 
@@ -92,8 +106,8 @@ public class Customer {
         FileWriter fw = new FileWriter(file);
         BufferedWriter bw = new BufferedWriter(fw);
 
-        for(int i = 0; i < 50000; i++){
-            bw.write((ids.get(i))+","+(names.get(i))+","+(ages.get(i))+","+(genders.get(i))+","+countryCodes.get(i)+","+(salaries.get(i)));
+        for (int i = 0; i < 50000; i++) {
+            bw.write((ids.get(i)) + "," + (names.get(i)) + "," + (ages.get(i)) + "," + (genders.get(i)) + "," + countryCodes.get(i) + "," + (salaries.get(i)));
             bw.newLine();
         }
 
@@ -102,7 +116,4 @@ public class Customer {
 
     }
 
-    private static int generateRandomNumber(int minValue, int maxValue){
-        return (int)(Math.random() * (maxValue - minValue) + minValue);
-    }
 }
