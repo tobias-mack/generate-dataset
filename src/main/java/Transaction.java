@@ -1,3 +1,4 @@
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -124,8 +125,8 @@ public class Transaction {
     private static int calcMaxValueForAdding(int index) {
         //(index%customers)+1 = numbers from 1 - 50.000
         //(index%customers)+1 + maxValue <= customers
-        //maxValue <= customers - (index%customers)+1
-        return (customers - (index % customers) + 1);
+        //maxValue <= customers - ((index%customers)+1)
+        return (customers - (index % customers) - 1);
     }
 
     private static int calcMaxValueForSubtracting(int index) {
