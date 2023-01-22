@@ -1,6 +1,7 @@
 # generate-dataset
 
-generate a dataset for an analysis with hadoop.
+generate a dataset for an [analysis with hadoop](https://github.com/tobias-mack/big-data-projects).
+
 
 generation of:
 - customers
